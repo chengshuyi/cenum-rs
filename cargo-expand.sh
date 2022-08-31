@@ -1,0 +1,1 @@
+cargo expand --bin cenum-rs
