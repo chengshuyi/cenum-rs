@@ -70,11 +70,11 @@ fn impl_cenum(syn: &DeriveInput) -> proc_macro2::TokenStream {
 
     let output = quote! {
         impl std::convert::TryFrom<#enum_type_token> for #enum_ident {
-            type Error = &'static str;
+            type Error = String;
             fn try_from(val: #enum_type_token) -> Result<Self, Self::Error> {
                 match val {
                     #(#tryfrom_c2rust_token)*
-                    _ => Err("failed to convert")
+                    _ => Err(format!("convert {} failurely", val))
                 }
             }
         }
